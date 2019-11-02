@@ -14,6 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
+let dbAccess = new DBAccess();
+
 // View the home page
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "/public/index.html"));
@@ -26,7 +28,17 @@ app.get("/notes", function(req, res) {
 
 // Read the db.json file and return all saved notes as JSON
 app.get("/api/notes", function(req, res) {
-    return DBAccess.getNotesJSON();
+    let statusCode = 200;
+    let notes = null;
+    try {
+        res.json(dbAccess.getNotesJSON());
+    } 
+    catch(err) {
+        // Internal error on the server side.
+        statusCode = 500; 
+        res.json(err);
+    }
+    return res.status(statusCode);
 });
 
 // Should recieve a query parameter containing the id of a note to delete. 
@@ -35,13 +47,28 @@ app.get("/api/notes", function(req, res) {
 // notes from the `db.json` file, remove the note with the given `id` 
 // property, and then rewrite the notes to the `db.json` file.
 app.delete("/api/notes/:id", function(req, res) {
-    DBAccess.deleteNote(req.params.id);
+    const success = dbAccess.deleteNote(req.params.id);
+
+    if(success) {
+        res.status(204); // HTML 204 request succeeded
+    } else {
+        res.status(404); // HTML status 404 not found
+    }
 });
 
 // Receive a new note to save on the request body, add it to
 // the db.json file, and then return the new note to the client.
 app.post("/api/notes", function(req, res) {
-    return DBAccess.addNote(req.body);
+    let statusCode = 201; // HTML status 201 creation successful
+    try {
+        res.json(dbAccess.addNote(req.body));
+    }
+    catch(err) {
+        // Internal error on the server side.
+        statusCode = 500; 
+        res.json(err);
+    }
+    return res.status(statusCode); 
 });
 
 // Starts the server to begin listening

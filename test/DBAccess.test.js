@@ -17,7 +17,8 @@ test("Can read the existing notes", () => {
 test("Can add a note", () => {
     let dbAccess = new DBAccess();
     dbAccess.setJSONFileName(testJSONFileName); // tell this test to use the test.json file
-    dbAccess.addNote("This is a test.", "This is only a test. Do not pass Go. Do not collect $200.");
+    const newNote = dbAccess.createNoteObject("This is a test.", "This is only a test. Do not pass Go. Do not collect $200.");
+    dbAccess.addNote(newNote);
     let notesJSON = dbAccess.getNotesJSON();
     let isLengthCorrect = (notesJSON.length == 2);
     let isCorrectNote = (notesJSON[1].id == 1);
@@ -28,7 +29,8 @@ test("Can add a note", () => {
 test("Can add another note", () => {
     let dbAccess = new DBAccess();
     dbAccess.setJSONFileName(testJSONFileName); // tell this test to use the test.json file
-    dbAccess.addNote("Yet another title test", "Yet another note");
+    const newNote = dbAccess.createNoteObject("Yet another title test", "Yet another note");
+    dbAccess.addNote(newNote);
     let notesJSON = dbAccess.getNotesJSON();
     let isLengthCorrect = (notesJSON.length == 3);
     let isCorrectNote = (notesJSON[2].id == 2);
