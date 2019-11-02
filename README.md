@@ -5,7 +5,8 @@
 All of the files can be loaded with your browser. Copy the files to your local directory, open a Git Terminal and type "node server.js". Then open a browser and navigate to localhost:3000.
 
 ### Prerequisites
-A browser. Chrome was used for testing. 
+   * A browser. Chrome was used for testing. 
+   * [Git terminal] https://git-scm.com/downloads
 
 ### Installing
     1. Go to https://github.com/ruthtech/note-taker and click on the "Clone or Download" button. 
