@@ -1,3 +1,5 @@
 node_modules
 journal.json
+.project
+package-lock.json
 
