@@ -30,9 +30,11 @@ Then open a browser on "localhost:3000":
     2. User adds a note.
     3. User deletes a note.
 
+To view the result of the tests without running them yourself, watch below:
+![./note-taker.gif](./note-taker.gif)
 
 ## Deployment
-Because this application requires a live server, there is no live demo at this time. Copy the files to your computer, start the server, and view localhost:3000.
+Because this application requires a live server, there is no live demo at this time. Copy the files to your computer, start the server, and view localhost:3000. Alternatively, view the animated GIF in the "Running the tests" section.
 
 ## Built With
 * [Visual Studio Code] https://code.visualstudio.com/docs/setup/setup-overview
