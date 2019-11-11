@@ -23,9 +23,11 @@ Type "npm test" in your Git terminal to run the automated test suite.
 
 ### Manual tests (for the UI)
 First start the server via your Git terminal:
+
     1. node server.js
 
 Then open a browser on "localhost:3000":
+
     1. User opens the note taker and looks at the notes that already exist.
     2. User adds a note.
     3. User deletes a note.
